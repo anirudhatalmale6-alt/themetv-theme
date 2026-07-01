@@ -24,7 +24,7 @@
                 </div>
             <?php endif; ?>
             <div class="category-header-info">
-                <h1>Chats en la categoria <?php single_term_title(); ?></h1>
+                <h1>Canales en la categoria <?php single_term_title(); ?></h1>
                 <?php if (term_description()) : ?>
                     <div class="category-header-desc"><?php echo term_description(); ?></div>
                 <?php endif; ?>
@@ -48,7 +48,7 @@
 
         <?php else : ?>
 
-        <h1 class="section-title">Todas las Salas de Chat</h1>
+        <h1 class="section-title">Todos los Canales de TV</h1>
         <p class="section-subtitle">Explora todas nuestras salas disponibles</p>
 
         <?php endif; ?>
@@ -85,7 +85,7 @@
 
         if ($featured->have_posts()) :
         ?>
-        <h2 class="section-title" style="font-size: 20px; margin-top: 40px; margin-bottom: 20px;">Salas de Chat Recomendadas</h2>
+        <h2 class="section-title" style="font-size: 20px; margin-top: 40px; margin-bottom: 20px;">Canales de TV Recomendados</h2>
         <div class="rooms-grid">
             <?php while ($featured->have_posts()) : $featured->the_post();
                 $users = get_post_meta(get_the_ID(), '_users_online', true);
@@ -173,7 +173,7 @@
         if ($all_rooms->have_posts()) :
         ?>
         <div class="all-rooms-section" style="margin-top: 40px;">
-            <h2 class="section-title" style="font-size: 20px; margin-bottom: 20px;">Todas las Salas</h2>
+            <h2 class="section-title" style="font-size: 20px; margin-bottom: 20px;">Todos los Canales</h2>
             <div class="all-rooms-links">
                 <?php while ($all_rooms->have_posts()) : $all_rooms->the_post(); ?>
                     <a href="<?php the_permalink(); ?>" class="room-link"><?php the_title(); ?></a>

@@ -10,7 +10,7 @@
         ?>
         <section class="hero-chat-section">
             <div class="container">
-                <h2 class="section-title"><?php echo esc_html(get_theme_mod('hero_title', 'Chat en Vivo')); ?></h2>
+                <h2 class="section-title"><?php echo esc_html(get_theme_mod('hero_title', 'TV en Vivo')); ?></h2>
                 <p class="section-subtitle"><?php echo esc_html(get_theme_mod('hero_subtitle', 'Unete a la conversacion ahora mismo')); ?></p>
                 <?php if ($hero_embed || $hero_xat_id) : ?>
                 <div class="chat-embed-wrapper">
@@ -49,7 +49,7 @@
         ?>
         <section class="rooms-section">
             <div class="container">
-                <h2 class="section-title">Salas de chat recomendadas</h2>
+                <h2 class="section-title">Canales de TV recomendados</h2>
                 <p class="section-subtitle">Las salas mas populares de nuestra comunidad</p>
                 <div class="rooms-grid">
                     <?php while ($featured_rooms->have_posts()) : $featured_rooms->the_post(); ?>

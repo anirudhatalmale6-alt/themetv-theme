@@ -39,7 +39,7 @@
                 $chat_url = get_theme_mod('chat_url', '');
                 if ($chat_url) :
                 ?>
-                <li><a href="<?php echo esc_url($chat_url); ?>" class="header-btn header-btn-chat">Entrar al Chat</a></li>
+                <li><a href="<?php echo esc_url($chat_url); ?>" class="header-btn header-btn-chat">Ver Canal</a></li>
                 <?php endif; ?>
                 <?php
                 $fb_url = get_theme_mod('facebook_group_url', '');

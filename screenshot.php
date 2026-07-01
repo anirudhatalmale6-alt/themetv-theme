@@ -43,7 +43,7 @@ for ($i = 0; $i < 3; $i++) {
     $x = 30 + ($i * 390);
     imagefilledrectangle($img, $x, $y, $x + 360, $y + 200, $bgSection);
     imagefilledrectangle($img, $x, $y, $x + 360, $y + 120, $primaryDark);
-    imagestring($img, 4, $x + 15, $y + 135, 'Sala de Chat ' . ($i + 1), $text);
+    imagestring($img, 4, $x + 15, $y + 135, 'Canal de TV ' . ($i + 1), $text);
     imagestring($img, 2, $x + 15, $y + 160, 'Descripcion de la sala...', $textLight);
     imagefilledrectangle($img, $x + 15, $y + 180, $x + 85, $y + 195, $primary);
     imagestring($img, 2, $x + 25, $y + 182, 'Entrar', $white);

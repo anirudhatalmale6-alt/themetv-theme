@@ -165,6 +165,9 @@ function chatjovenes_room_meta_callback($post) {
     $show_radio = get_post_meta($post->ID, '_show_radio', true);
     $radio_embed = get_post_meta($post->ID, '_radio_embed_code', true);
     $radio_url = get_post_meta($post->ID, '_radio_stream_url', true);
+    $show_video = get_post_meta($post->ID, '_show_video', true);
+    $video_embed = get_post_meta($post->ID, '_video_embed_code', true);
+    $video_url = get_post_meta($post->ID, '_video_url', true);
     ?>
     <table class="form-table">
         <tr>
@@ -231,6 +234,29 @@ function chatjovenes_room_meta_callback($post) {
                 <p class="description">URL directa del streaming de radio (se usa si no hay codigo embed)</p>
             </td>
         </tr>
+        <tr>
+            <th><label for="show_video">Mostrar Reproductor de Video</label></th>
+            <td>
+                <label>
+                    <input type="checkbox" id="show_video" name="show_video" value="1" <?php checked($show_video, '1'); ?>>
+                    Mostrar reproductor de video en la pagina
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="video_embed_code">Video - Codigo Embed</label></th>
+            <td>
+                <textarea id="video_embed_code" name="video_embed_code" rows="3" class="large-text code"><?php echo esc_textarea($video_embed); ?></textarea>
+                <p class="description">Pega aqui el codigo embed/iframe del reproductor de video (tiene prioridad sobre la URL)</p>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="video_url">Video - URL del Video</label></th>
+            <td>
+                <input type="url" id="video_url" name="video_url" value="<?php echo esc_attr($video_url); ?>" class="large-text">
+                <p class="description">URL directa del video (YouTube, MP4, etc.)</p>
+            </td>
+        </tr>
     </table>
     <?php
 }
@@ -255,6 +281,13 @@ function chatjovenes_save_room_meta($post_id) {
     }
     if (isset($_POST['radio_stream_url'])) {
         update_post_meta($post_id, '_radio_stream_url', esc_url_raw($_POST['radio_stream_url']));
+    }
+    update_post_meta($post_id, '_show_video', isset($_POST['show_video']) ? '1' : '0');
+    if (isset($_POST['video_embed_code'])) {
+        update_post_meta($post_id, '_video_embed_code', chatjovenes_sanitize_embed($_POST['video_embed_code']));
+    }
+    if (isset($_POST['video_url'])) {
+        update_post_meta($post_id, '_video_url', esc_url_raw($_POST['video_url']));
     }
 }
 add_action('save_post_chat_room', 'chatjovenes_save_room_meta');

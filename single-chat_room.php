@@ -9,6 +9,9 @@
         $show_radio = get_post_meta(get_the_ID(), '_show_radio', true);
         $radio_embed = get_post_meta(get_the_ID(), '_radio_embed_code', true);
         $radio_stream_url = get_post_meta(get_the_ID(), '_radio_stream_url', true);
+        $show_video = get_post_meta(get_the_ID(), '_show_video', true);
+        $video_embed = get_post_meta(get_the_ID(), '_video_embed_code', true);
+        $video_url = get_post_meta(get_the_ID(), '_video_url', true);
     ?>
 
     <!-- BREADCRUMB -->
@@ -59,6 +62,21 @@
                 </div>
                 <div class="chat-embed-wrapper">
                     <?php echo $room_embed; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <?php if ($show_video && $show_video === '1' && ($video_embed || $video_url)) : ?>
+            <div class="video-player-box" style="margin-top: 20px; background: var(--bg-section); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);">
+                <div class="video-player-label" style="padding: 12px 20px; background: #e74c3c; color: #fff; font-weight: 600; font-size: 15px;">Reproductor</div>
+                <div class="video-player-content" style="width: 100%;">
+                    <?php if ($video_embed) : ?>
+                        <?php echo do_shortcode($video_embed); ?>
+                    <?php elseif ($video_url) : ?>
+                        <video controls style="width: 100%; display: block;">
+                            <source src="<?php echo esc_url($video_url); ?>">
+                        </video>
+                    <?php endif; ?>
                 </div>
             </div>
             <?php endif; ?>

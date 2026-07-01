@@ -168,6 +168,7 @@ function chatjovenes_room_meta_callback($post) {
     $show_video = get_post_meta($post->ID, '_show_video', true);
     $video_embed = get_post_meta($post->ID, '_video_embed_code', true);
     $video_url = get_post_meta($post->ID, '_video_url', true);
+    $video_poster = get_post_meta($post->ID, '_video_poster', true);
     ?>
     <table class="form-table">
         <tr>
@@ -244,6 +245,14 @@ function chatjovenes_room_meta_callback($post) {
             </td>
         </tr>
         <tr>
+            <th><label for="video_poster">Video - Imagen Poster</label></th>
+            <td>
+                <input type="text" id="video_poster" name="video_poster" value="<?php echo esc_attr($video_poster); ?>" class="large-text">
+                <p class="description">URL de la imagen del poster/thumbnail del canal. Se muestra con un boton de play. Al dar click carga el video.</p>
+                <button type="button" class="button" onclick="var frame=wp.media({title:'Seleccionar Imagen',button:{text:'Usar esta imagen'},multiple:false});frame.on('select',function(){var a=frame.state().get('selection').first().toJSON();document.getElementById('video_poster').value=a.url;});frame.open();">Subir Imagen</button>
+            </td>
+        </tr>
+        <tr>
             <th><label for="video_embed_code">Video - Codigo Embed</label></th>
             <td>
                 <textarea id="video_embed_code" name="video_embed_code" rows="3" class="large-text code"><?php echo esc_textarea($video_embed); ?></textarea>
@@ -288,6 +297,9 @@ function chatjovenes_save_room_meta($post_id) {
     }
     if (isset($_POST['video_url'])) {
         update_post_meta($post_id, '_video_url', esc_url_raw($_POST['video_url']));
+    }
+    if (isset($_POST['video_poster'])) {
+        update_post_meta($post_id, '_video_poster', esc_url_raw($_POST['video_poster']));
     }
 }
 add_action('save_post_chat_room', 'chatjovenes_save_room_meta');

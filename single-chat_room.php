@@ -67,18 +67,36 @@
             <?php endif; ?>
 
             <?php if ($show_video && $show_video === '1' && ($video_embed || $video_url)) : ?>
-            <div class="video-player-box" style="margin-top: 20px; background: var(--bg-section); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);">
-                <div class="video-player-label" style="padding: 12px 20px; background: #e74c3c; color: #fff; font-weight: 600; font-size: 15px;">Reproductor</div>
-                <div class="video-player-content" style="width: 100%;">
+            <div class="video-player-box" style="margin-top: 20px; background: #000; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); position: relative;">
+                <?php if ($video_poster) : ?>
+                <div class="video-poster" id="videoPoster" style="position: relative; cursor: pointer; width: 100%;">
+                    <img src="<?php echo esc_url($video_poster); ?>" alt="<?php the_title(); ?>" style="width: 100%; display: block;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(255,0,0,0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.4); transition: transform 0.3s;">
+                        <span style="color: #fff; font-size: 32px; margin-left: 5px;">&#9654;</span>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <div class="video-player-content" id="videoContent" style="width: 100%; <?php echo $video_poster ? 'display:none;' : ''; ?>">
                     <?php if ($video_embed) : ?>
                         <?php echo do_shortcode($video_embed); ?>
                     <?php elseif ($video_url) : ?>
-                        <video controls style="width: 100%; display: block;">
-                            <source src="<?php echo esc_url($video_url); ?>">
-                        </video>
+                        <iframe src="<?php echo esc_url($video_url); ?>" width="100%" height="500" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display:block;"></iframe>
                     <?php endif; ?>
                 </div>
             </div>
+            <?php if ($video_poster) : ?>
+            <script>
+            document.getElementById('videoPoster').addEventListener('click', function() {
+                this.style.display = 'none';
+                var content = document.getElementById('videoContent');
+                content.style.display = 'block';
+                var iframe = content.querySelector('iframe');
+                if (iframe && iframe.src.indexOf('autoplay') === -1) {
+                    iframe.src = iframe.src + (iframe.src.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';
+                }
+            });
+            </script>
+            <?php endif; ?>
             <?php endif; ?>
 
             <?php if ($show_radio && $show_radio === '1' && ($radio_embed || $radio_stream_url)) : ?>
